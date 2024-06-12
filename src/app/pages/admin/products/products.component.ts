@@ -27,16 +27,35 @@ export class ProductsComponent implements OnInit {
   };
 
   categoriesList: any [] = [];
+  productsList: any [] = [];
 
   constructor(private productSrv: ProductService) {}
 
   ngOnInit(): void {
     this.getAllCategories();
+    this.getAllProducts();
   }
 
   getAllCategories() {
     this.productSrv.getAllcategories().subscribe((res:any) => {
-      this.categoriesList = res.data;
+      this.productsList = res.data;
+    });
+  }
+
+  getAllProducts() {
+    this.productSrv.getAllProducts().subscribe((res:any) => {
+      this.productsList = res.data;
+    });
+  }
+
+  onSave() {
+    this.productSrv.saveProduct(this.productObj).subscribe((res:any) => {
+      if(res.result){
+        alert("Product Created");
+        this.getAllProducts();
+      }else{
+        alert(res.message);
+      }
     });
   }
 
