@@ -38,7 +38,7 @@ export class ProductsComponent implements OnInit {
 
   getAllCategories() {
     this.productSrv.getAllcategories().subscribe((res:any) => {
-      this.productsList = res.data;
+      this.categoriesList = res.data;
     });
   }
 
@@ -51,7 +51,7 @@ export class ProductsComponent implements OnInit {
   onSave() {
     this.productSrv.saveProduct(this.productObj).subscribe((res:any) => {
       if(res.result){
-        alert("Product Created");
+        alert("Product updated");
         this.getAllProducts();
       }else{
         alert(res.message);
@@ -64,8 +64,28 @@ export class ProductsComponent implements OnInit {
     this.openSidePanel();
   }
 
-  onDelete() {
+  onDelete(id: number) {
+    const isDelete = confirm('Are you sure want to delete ?');
+    if(isDelete) {
+      this.productSrv.deleteProduct(id).subscribe((res: any) => {
+        if(res.result){
+          alert("Product Deleted");
+        }else{
+          alert(res.message);
+        }
+      });
+    }
+  }
 
+  onUpdate() {
+    this.productSrv.saveProduct(this.productObj).subscribe((res:any) => {
+      if(res.result){
+        alert("Product Created");
+        this.getAllProducts();
+      }else{
+        alert(res.message);
+      }
+    });
   }
 
   openSidePanel() {
