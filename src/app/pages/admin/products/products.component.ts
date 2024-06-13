@@ -59,6 +59,15 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  onEdit(item: any) {
+    this.productObj = item;
+    this.openSidePanel();
+  }
+
+  onDelete() {
+
+  }
+
   openSidePanel() {
     this.isSidePanelVisible = true;
   }

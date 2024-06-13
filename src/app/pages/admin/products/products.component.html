@@ -19,7 +19,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{product.productName}}</h4>
                                 <p class="card-text">{{product.categoryName}}</p>
-                                <a href="#" class="btn btn-primary">See Profile</a>
+                                <a class="btn btn-primary" (click)="onEdit(product)">Edit</a>
+                                <a class="btn btn-primary mx-2" (click)="onDelete()">Delete</a>
                             </div>
                         </div>
                     </div>
