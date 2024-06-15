@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../../../services/product/product.service';
 
 @Component({
   selector: 'app-landing',
@@ -8,6 +9,18 @@ import { Component } from '@angular/core';
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
-export class LandingComponent {
+export class LandingComponent implements OnInit {
+  productList: any[] = [];
 
+  constructor(private prodSrv: ProductService){}
+
+  ngOnInit(): void {
+    
+  }
+
+  getAllProducts(){
+    this.prodSrv.getAllProducts().subscribe((res:any) => {
+      this.productList = res.data;
+    });
+  }
 }
